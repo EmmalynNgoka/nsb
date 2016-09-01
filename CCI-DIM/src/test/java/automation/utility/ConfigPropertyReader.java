@@ -13,7 +13,7 @@ public class ConfigPropertyReader {
 	private String defaultTimeOut;
 
 	public ConfigPropertyReader() {
-		loadProperties(System.getProperty("user.dir") + "\\resources\\config.properties");
+		loadProperties(System.getProperty("user.dir") + "//resources//config.properties");
 	}
 
 	public void loadProperties(String propPath) {
