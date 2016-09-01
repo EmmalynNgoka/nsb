@@ -17,7 +17,7 @@ public class DataPropertyReader {
 	Properties properties;
 
 	public DataPropertyReader() {
-		properties = loadProperties(System.getProperty("user.dir") + "\\resources\\data.properties");
+		properties = loadProperties(System.getProperty("user.dir") + "//resources//data.properties");
 	}
 
 	public String getProperty(String key) {
