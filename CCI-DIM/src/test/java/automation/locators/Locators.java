@@ -36,7 +36,7 @@ public interface Locators {
 		String calendarMonthList = "//strong[@class='ng-binding']";
 		String calendarMonthSelect = "//span[text()='%s']";
 		String calendarDateSelect = "//span[@class='ng-binding' and text()='%s']";
-
+		String frequencyLimitorCheckboxXpath = "//input[@data-ng-model=\"campaign.goal.hasLimit\"]";;
 		String createNewCampBtnCSS = "#btn-add-campaign";
 		String campNameXpath = "//input[@data-ng-model='model.campaign.name']";
 		String calendarIconXpath = "//i[@class='icon-calendar']";

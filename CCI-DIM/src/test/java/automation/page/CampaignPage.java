@@ -5,6 +5,9 @@ import org.openqa.selenium.support.PageFactory;
 import automation.locators.Locators.CampPageLocators;
 import automation.utility.CommonUtility;
 import automation.utility.DriverUtility;
+import cucumber.api.PendingException;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class CampaignPage extends DriverUtility implements CampPageLocators {
 
@@ -22,6 +25,22 @@ public class CampaignPage extends DriverUtility implements CampPageLocators {
 		CommonUtility.wait(2000);
 		getElementByCSS(trashCampCSS).click();
 		waitForElementNotVisible(loadingSpinnerXpath);
+	}
+
+	@When("^I click on Create Campaing button$")
+	public void I_click_on_Create_Campaing_button() {
+		getElementByCSS(createNewCampBtnCSS).click();
+	}
+
+	@When("^Select subtab \"([^\"]*)\"$")
+	public void Select_subtab(String subTab) {
+		TemplatePage templatePage = new TemplatePage();
+		templatePage.chooseSubTab("Goals");
+	}
+
+	@Then("^verify frequency limiter checkbox should be displayed$")
+	public void verify_frequency_limiter_checkbox_should_be_displayed() {
+		verifyVisible(getElementByXpath(frequencyLimitorCheckboxXpath), "Frequency limiter");
 	}
 
 	public void verifyCampaingPage() {

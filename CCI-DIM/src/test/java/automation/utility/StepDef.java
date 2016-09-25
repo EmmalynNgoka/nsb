@@ -1,13 +1,15 @@
 package automation.utility;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.Assert;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import automation.page.AdvertisementPage;
 import automation.page.CampaignPage;
@@ -335,11 +337,15 @@ public class StepDef {
 	 * 
 	 * @param browser
 	 */
+
+	public static void main(String[] args) {
+		System.out.println(System.getenv("PHANTOMJS_BINARY_PATH"));
+	}
+
 	private void chooseBrowser(String browser) {
 		System.out.println(browser);
 		switch (browser) {
 		case "firefoxDriver":
-
 			driver = new FirefoxDriver();
 			break;
 
@@ -347,6 +353,18 @@ public class StepDef {
 
 			System.setProperty("webdriver.chrome.driver", properties.getDriverFile());
 			driver = new ChromeDriver();
+			break;
+		case "phantomjs":
+			String phantomjsBinaryPath = System.getProperty("user.dir") + "\\drivers\\phantomjs.exe";
+			System.out.println("phantomjsBinaryPath=" + phantomjsBinaryPath);
+			Assert.assertNotNull("PHANTOMJS_BINARY_PATH environment variable not specified", phantomjsBinaryPath);
+
+			DesiredCapabilities capabilities = new DesiredCapabilities();
+			capabilities.setJavascriptEnabled(true);
+			capabilities.setCapability("takesScreenshot", true);
+			capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, phantomjsBinaryPath);
+
+			driver = new PhantomJSDriver(capabilities);
 			break;
 		}
 	}
