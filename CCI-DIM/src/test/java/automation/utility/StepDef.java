@@ -355,7 +355,7 @@ public class StepDef {
 			driver = new ChromeDriver();
 			break;
 		case "phantomjs":
-			String phantomjsBinaryPath = System.getProperty("user.dir") + "/drivers/phantomjs.exe";
+			String phantomjsBinaryPath = System.getProperty("user.dir") + "/drivers/phantomjs";
 			System.out.println("phantomjsBinaryPath=" + phantomjsBinaryPath);
 			Assert.assertNotNull("PHANTOMJS_BINARY_PATH environment variable not specified", phantomjsBinaryPath);
 
