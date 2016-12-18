@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import automation.locators.Locators.CampPageLocators;
 import automation.locators.Locators.InventoryPageLocators;
 import automation.utility.CommonUtility;
 import automation.utility.DriverUtility;
@@ -14,7 +15,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-public class InventoryPage extends DriverUtility implements InventoryPageLocators {
+public class InventoryPage extends DriverUtility implements InventoryPageLocators, CampPageLocators {
 
 	public InventoryPage() {
 		PageFactory.initElements(getDriver(), this);
@@ -205,10 +206,35 @@ public class InventoryPage extends DriverUtility implements InventoryPageLocator
 		waitForElementClickable(getElementByXpath(removeInvConfirmRemove));
 		clickElementUsingJs(getElementByXpath(removeInvConfirmRemove));
 	}
-	
+
 	@When("^I click on confirm button$")
-	public void clickOnConfirm(){
+	public void clickOnConfirm() {
 		clickElementUsingJs(getElementByXpath(removeInvConfirmRemove));
+	}
+
+	public void clickOnRunningCamp() {
+		getElementByXpath(runningInventory).click();
+	}
+
+	public void unreservedCamp() {
+		waitForElementPresent("xpath", runningInventory);
+		CommonUtility.wait(5000);
+		getElementByXpath(runningInventory).click();
+		waitForElementPresent("xpath", waitCampEle);
+		List<WebElement> campList = getElementListByXpath(campListInventory);
+
+		while (campList.size() != 0) {
+			waitForElementPresent("xpath", waitCampEle);
+			campList.get(0).click();
+			waitForElementPresent("css", dropDownChangeStateCSS);
+			clickElementUsingJs(getElementByCSS(dropDownChangeStateCSS));
+			clickElementUsingJs(getElementByCSS(setAsNotReserved));
+			clickElementUsingJs(getElementByXpath(confirmNotReserved));
+			waitForElementPresent("xpath", successUnreserved);
+			driver.navigate().back();
+			CommonUtility.wait(5000);
+			campList = getElementListByXpath(campListInventory);
+		}
 	}
 
 }

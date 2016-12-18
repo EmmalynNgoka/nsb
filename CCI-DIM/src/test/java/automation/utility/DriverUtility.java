@@ -212,6 +212,7 @@ public class DriverUtility {
 	public void clickElementUsingJs(WebElement element) {
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
 		executor.executeScript("arguments[0].click();", element);
+		CommonUtility.wait(2000);
 	}
 
 	public void navigateToUrl(String url) {

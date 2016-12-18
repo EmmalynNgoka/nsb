@@ -10,7 +10,6 @@ public class CommonUtility {
 	 * @param millis
 	 */
 
-	
 	public static void wait(int millis) {
 		try {
 			Thread.sleep(millis);

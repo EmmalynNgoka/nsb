@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigPropertyReader {
+	Properties properties;
 	private String baseUrl;
 	private String defaultBrowser;
 	private String driverFile;
@@ -13,10 +14,14 @@ public class ConfigPropertyReader {
 	private String defaultTimeOut;
 
 	public ConfigPropertyReader() {
-		loadProperties(System.getProperty("user.dir") + "/resources/config.properties");
+		properties = loadProperties(System.getProperty("user.dir") + "/resources/config.properties");
 	}
 
-	public void loadProperties(String propPath) {
+	public String getProperty(String key) {
+		return properties.getProperty(key);
+	}
+
+	public Properties loadProperties(String propPath) {
 		Properties properties = new Properties();
 		InputStream input = null;
 
@@ -32,6 +37,7 @@ public class ConfigPropertyReader {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+		return properties;
 	}
 
 	public String getRetryCount() {

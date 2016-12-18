@@ -162,5 +162,13 @@ public interface Locators {
 
 		String backToInventory = "//i[@class=\"icon-arrow-left\"]";
 
+		// Unreserving inventory
+		String runningInventory = "//div[@data-ng-click=\"goToCampaignTab()\"]/a";
+		String campListInventory = "//table[@class=\"table table-hover\"]//tbody/tr//a";
+		String waitCampEle = "//table[@class=\"table table-hover\"]//tbody/tr[1]//a";
+		String setAsNotReserved = ".btn-flat.btn-warning.white-text.full-width";
+		String confirmNotReserved = "//div[@class=\"modal-footer ng-scope\"]/button";
+		String successUnreserved = ".//div[@id='toast-container']/div";
+
 	}
 }
